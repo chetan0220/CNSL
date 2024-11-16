@@ -1,3 +1,4 @@
+# Implement Polyalphabetic cipher(Vegenary CIpher)
 def value_of_key(key):
     return [ord(char.lower()) - ord('a') for char in key]
 
@@ -38,3 +39,10 @@ encrypted_text = encrypt(plaintext, key)
 decrypted_text = decrypt(encrypted_text, key)
 
 print(f"Encrypted: {encrypted_text} ------- Decrypted: {decrypted_text}")
+'''
+TC = O(n) both encryption and decryption
+Adv:
+    -  resists frequency analysis because multiple letters map to each plaintext letter
+    - long key --> increased strength
+
+'''
