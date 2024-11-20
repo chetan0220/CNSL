@@ -71,8 +71,9 @@ def main():
     verify_signature(decrypted_msg, signature, x_pub)
 
     # s5: check msg integrity
-    hash = hash_message(decrypted_msg)
-    print(f"Hash value of message: {hash}")
+    dec_msg_hash = hash_message(decrypted_msg)
+    msg_hash = hash_message(message)
+    print("Integrity verified") if dec_msg_hash == msg_hash else print("Integrity not verified")
 
 if __name__ == "__main__":
     main()
