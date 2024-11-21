@@ -1,34 +1,46 @@
 # Implement monoalphabetic cipher
 
 import random
-
 def generate_key():
-    aplhabet = 'abcdefghijklmnopqrstuvwxyz'
-    shuffled = ''.join(random.sample(aplhabet, len(aplhabet)))
-    key = dict(zip(aplhabet, shuffled))
-    return key
+    alphabets = 'abcdefghijklmnopqrstuvwxyz'
+    shuffled = ''.join(random.sample(alphabets, len(alphabets)))
+    return dict(zip(alphabets, shuffled))
 
-def encrypt(plain_text, key):
-    encrypted_txt = ''
+def reverse_key(key):
+    return {v: k for k,v in key.items()}
 
-    for char in plain_text:
+def encrypt(plaintext, key):
+    encrypted = ''
+    for char in plaintext:
         if char.isalpha():
-            encrypted_txt += key[char.lower()].upper() if char.isupper() else key[char]
+            encrypted += key[char.lower()].upper() if char.isupper() else key[char]
         else:
-            encrypted_txt += char
-    
-    return encrypted_txt
+            encrypted += char
+    return encrypted
+
+def decrypt(plaintext, reversed_key):
+    decrypted = ''
+    for char in plaintext:
+        if char.isalpha():
+            decrypted += reversed_key[char.lower()].upper() if char.isupper() else reversed_key[char]
+        else:
+            decrypted += char
+    return decrypted
 
 def main():
     key = generate_key()
-    print(key.items())
-    plain_text = "i AM ai"
-    encrypted_txt = encrypt(plain_text=plain_text, key=key)
-    print(encrypted_txt)
+    print(key)
+    plaintext = "i am AI 8"
+    cipher = encrypt(plaintext, key)
+    print(cipher)
 
-if __name__ == '__main__':
+    reversed_key = reverse_key(key)
+    print(reversed_key)
+    decrypted = decrypt(cipher, reversed_key)
+    print(decrypted)
+
+if __name__ == "__main__":
     main()
-
 
 '''
 TC: O(n); n = len(plain_text); lookup --> O(1); generate_key() --> O(1)
